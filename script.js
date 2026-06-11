@@ -717,7 +717,7 @@ if (plusBtn) {
   return
   }
 
-  input.value = secToHHMMSS(sec + 300)
+  input.value = secToHHMMSS(sec + 60)
   }
   }
 
@@ -738,7 +738,7 @@ if (plusBtn) {
   return
   }
 
-  input.value = secToHHMMSS(sec + 360)
+  input.value = secToHHMMSS(sec + 300)
   }
   }
 
@@ -759,7 +759,7 @@ if (plusBtn) {
   return
   }
 
-  input.value = secToHHMMSS(sec - 300)
+  input.value = secToHHMMSS(sec - 60)
   }
   }
 
