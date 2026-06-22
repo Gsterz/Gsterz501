@@ -323,6 +323,40 @@ function secToHHMMSS(sec){
 
     return `${h}:${m}:${s}`
   }
+
+function showCopyMessage(text, x, y) {
+
+  const popup = document.getElementById("copyPopup")
+
+  popup.innerHTML = `<strong>${text}</strong> 복사됨`
+
+  popup.style.position = "fixed"
+  popup.style.left = `${x}px`
+  popup.style.top = `${y}px`
+  popup.style.bottom = "auto"
+
+  popup.style.transform = "translate(-50%, -120%)"
+
+  popup.style.background = "rgba(40,40,40,0.92)"
+  popup.style.color = "#fff"
+  popup.style.fontWeight = "700"
+  popup.style.fontSize = "14px"
+
+  popup.style.border = "none"
+  popup.style.borderRadius = "10px"
+
+  popup.style.padding = "10px 14px"
+  popup.style.whiteSpace = "nowrap"
+
+  popup.style.boxShadow = "0 4px 12px rgba(0,0,0,0.35)"
+  popup.style.zIndex = "9999"
+
+  popup.style.display = "block"
+
+  setTimeout(() => {
+    popup.style.display = "none"
+  }, 1500)
+}
   
   // =========================
   // 쉬운주유 계산
@@ -717,7 +751,7 @@ if (plusBtn) {
   return
   }
 
-  input.value = secToHHMMSS(sec + 60)
+  input.value = secToHHMMSS(sec + 300)
   }
   }
 
@@ -738,7 +772,7 @@ if (plusBtn) {
   return
   }
 
-  input.value = secToHHMMSS(sec + 300)
+  input.value = secToHHMMSS(sec + 360)
   }
   }
 
@@ -759,7 +793,7 @@ if (plusBtn) {
   return
   }
 
-  input.value = secToHHMMSS(sec - 60)
+  input.value = secToHHMMSS(sec - 300)
   }
   }
 
@@ -876,6 +910,34 @@ if (btnCalc4) {
       }
     })
   }
+
+const targetUtcInput = document.getElementById("TargetUTCTime")
+
+if (targetUtcInput) {
+
+  targetUtcInput.style.cursor = "pointer"
+
+  targetUtcInput.addEventListener("click", () => {
+
+    const value = targetUtcInput.value
+
+    if (!/^\d{2}:\d{2}:\d{2}$/.test(value)) return
+
+    const [, mm, ss] = value.split(":")
+
+    const copyText = `${mm} ${ss}`
+
+    navigator.clipboard.writeText(copyText)
+
+    const rect = targetUtcInput.getBoundingClientRect()
+
+    showCopyMessage(
+      copyText,
+      rect.left + rect.width / 2,
+      rect.top
+    )
+  })
+}
   
 // =========================
 // 연집 계산 (btnCalcExplain5)
